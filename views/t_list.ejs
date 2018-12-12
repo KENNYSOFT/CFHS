@@ -1,22 +1,38 @@
-<% title = "CFHS :: 팀 목록" %>
-<% menu = "team_list" %>
+<% title = "CFHS :: free" %>
+<% menu = "index" %>
 <% include header.ejs %>
 
-<table class = "table">
-    <thead>
-        <tr>
-            <th>팀 이름</th>
-            <th>팀장 id</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% rows.forEach(function(el) { %> 
-        <tr>
-            <td>165</td> <!--el.Tname-->
-            <td>test</td> <!--el.Leader_id-->
-        </tr>
-        <% }) %>
-    </tbody>
-</table>
+
+<form class="well" data-ajax="false" method="post" action="/team/list_selected" style="padding-top:120px">
+
+    <div>
+        <table id="waiting_team_table" class="table table-hover text-center">
+            <thead>
+                <th>팀 목록</th>
+            </thead>
+            <tbody>
+
+
+                <% rows.forEach(function(el) { %>
+                <tr>
+                    <td>Team A</td>
+                    <% if(el.Leader_id === session.id) { %>
+                    <td>팀장</td>
+                    <% } %>
+                    <td>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" name = "move" type = "submit" value = <%= el.Tid %>> 팀으로 이동</button>
+                    </div>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+
+  </form>
 
 <% include footer.ejs %>

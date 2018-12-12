@@ -28,6 +28,7 @@
                         <a class="dropdown-item<% if (menu === "request_list") { %> active<% } %>" href="<% if (menu === "request_list") { %>#<% } else { %>/request/list<% } %>">의뢰 목록 보기<% if (menu === "request_list") { %> <span class="sr-only">(현재)</span><% } %></a>
                     </div>
                 </li>
+                <% if(session.utype != 2) { %>
                 <li class="nav-item dropdown<% if (menu.startsWith("team")) { %> active<% } %>">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="teams">팀</a>
                     <div class="dropdown-menu" aria-labelledby="teams">
@@ -35,6 +36,15 @@
                         <a class="dropdown-item<% if (menu === "team_make") { %> active<% } %>" href="<% if (menu === "team_make") { %>#<% } else { %>/team/make<% } %>">팀 만들기<% if (menu === "team_make") { %> <span class="sr-only">(현재)</span><% } %></a>
                         <% } %>
                         <a class="dropdown-item<% if (menu === "team_list") { %> active<% } %>" href="<% if (menu === "team_list") { %>#<% } else { %>/team/list<% } %>">나의 팀 목록 보기<% if (menu === "team_list") { %> <span class="sr-only">(현재)</span><% } %></a>
+                    </div>
+                <% } %>
+                </li>
+                <% if(session.utype == 1) { %>
+                <li class="nav-item dropdown<% if (menu.startsWith("profile")) { %> active<% } %>">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="profile">프로필</a>
+                    <div class="dropdown-menu" aria-labelledby="profile">
+                        <a class="dropdown-item<% if (menu === "profile_modify") { %> active<% } %>" href="<% if (menu === "profile_modify") { %>#<% } else { %>/profile/modify<% } %>">프로필 수정<% if (menu === "profile_modify") { %> <span class="sr-only">(현재)</span><% } %></a>
+                        <% } %>
                     </div>
                 </li>
                 <% } %>

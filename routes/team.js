@@ -18,5 +18,10 @@ router.get('/make', wrapper.asyncMiddleware(async (req, res, next) =>  {
         rows : rows});
   }));
 
-
+router.get('/selected_list', wrapper.asyncMiddleware(async (req, res, next) =>  {
+    var rows = await db.getQueryResult("SELECT * from team", []);
+    res.render('t_make', {
+        session: req.session,
+        rows : rows});
+  }));
 module.exports = router;
