@@ -3,7 +3,7 @@
 <% include header.ejs %>
 
 
-<form class="well" data-ajax="false" method="get" action="/team/list_selected" style="padding-top:120px">
+<form class="well" data-ajax="false" method="post" action="/team/list_selected" style="padding-top:120px">
 
     <div>
         <table id="waiting_team_table" class="table table-hover text-center">
@@ -12,27 +12,18 @@
             </thead>
             <tbody>
 
-                    <tr>
-                            <td>Team A</td>
-                            <td>팀장</td>
-                            <td>팀 초대받음</td>
-                            <td>
-                            <div class="btn-group">
-                                    <button class="btn btn-primary" type = "submit" value = 1> >팀으로 이동</button>
-                            </div>
-                            </td>
-                        </tr>
 
                 <% rows.forEach(function(el) { %>
                 <tr>
                     <td>Team A</td>
                     <% if(el.Leader_id === session.id) { %>
                     <td>팀장</td>
-                    <% } if(el.초대받음) { %>
-                    <td>팀 초대받음</td><% } %>
+                    <% } %>
+                    <td>
                     <div class="btn-group">
-                            <button class="btn btn-primary" type = "submit" value = <%= el.Tid %> >팀으로 이동</button>
+                        <button class="btn btn-primary" name = "move" type = "submit" value = <%= el.Tid %>> 팀으로 이동</button>
                     </div>
+                    </td>
                 </tr>
                 <% }) %>
             </tbody>
