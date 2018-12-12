@@ -2,14 +2,12 @@
 <% menu = "request_list" %>
 <% include header.ejs %>
 
-<form class="well" data-ajax="false" method="post" action="/request/sort">
-    <div class="btn-group">
-            <button class="btn btn-primary" type = "submit" value = "start_time">시작 날짜 순으로 정렬</button>
-            <button class="btn btn-primary" type = "submit" value = "cost">가격 순으로 정렬</button>
-          </div>
-</form>
+<div class="btn-group">
+    <button class="btn btn-primary" onclick="window.location.href='/request/sort/start_time/<%= typeof(legend) !== "undefined" && legend === "start_time" && typeof(order) !== "undefined" && order === "asc" ? "desc" : "asc" %>'">시작 날짜 순으로 정렬</button>
+    <button class="btn btn-primary" onclick="window.location.href='/request/sort/price/<%= typeof(legend) !== "undefined" && legend === "price" && typeof(order) !== "undefined" && order === "asc" ? "desc" : "asc" %>'">가격 순으로 정렬</button>
+</div>
 
-<table class = "table">
+<table class = "table table-striped table-hover">
     <thead>
         <tr>
             <th>의뢰번호</th>
@@ -19,20 +17,18 @@
     <tbody>
         <% rows.forEach(function(el) { %> 
         <tr>
-            <td>165</td>
-            <td>test</td>
+            <td><%= el.Rid %></td>
+            <td><%= el.Name %></td>
         </tr>
         <% }) %>
     </tbody>
 </table>
 
-<form class="well" data-ajax="false" method="post" action="/request/search">
-    <div class="btn-group">
-            <button class="btn btn-primary" type = "submit" value = "finding">구인중인 의뢰</button>
-            <button class="btn btn-primary" type = "submit" value = "applicable">신청 가능한 의뢰</button>
-            <button class="btn btn-primary" type = "submit" value = "proceeding">진행중인 의뢰</button>
-            <button class="btn btn-primary" type = "submit" value = "requested">신청한 의뢰</button>
-    </div>
-</form>
+<div class="btn-group">
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/finding'">구인중인 의뢰</button>
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/applicable'">신청 가능한 의뢰</button>
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/proceeding'">진행중인 의뢰</button>
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/requested'">신청한 의뢰</button>
+</div>
 
 <% include footer.ejs %>
