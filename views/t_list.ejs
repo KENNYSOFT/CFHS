@@ -1,22 +1,113 @@
-<% title = "CFHS :: 팀 목록" %>
-<% menu = "team_list" %>
+<% title = "CFHS :: free" %>
+<% menu = "index" %>
 <% include header.ejs %>
 
-<table class = "table">
-    <thead>
-        <tr>
-            <th>팀 이름</th>
-            <th>팀장 id</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% rows.forEach(function(el) { %> 
-        <tr>
-            <td>165</td> <!--el.Tname-->
-            <td>test</td> <!--el.Leader_id-->
-        </tr>
-        <% }) %>
-    </tbody>
-</table>
+<style>
+.overlay{
+height:80%;
+width:50%;
+display:none;
+position:fixed;
+z-index:1;
+top:10%;
+left:25%;
+background:rgb(0,0,0);
+background:rgba(0,0,0,0.7);
+}
+.overlay-content{
+position:relative;
+top:10%;
+text-align:center;
+margin:auto;
+color:#fff;
+}
+.overlay .closebtn{
+position:absolute;
+cursor:pointer;
+top:1%;
+left:95%;
+font-size:60px;
+color:#fff;
+}
+</style>
+<form class="well" data-ajax="false" method="get" action="/team/list_selected" style="padding-top:120px">
+
+    <div>
+        <table id="waiting_team_table" class="table table-hover text-center">
+            <thead>
+                <th>팀 목록</th>
+            </thead>
+            <tbody>
+                <% rows.forEach(function(el) { %>
+                <tr>
+                    <td>Team A</td>
+                    <% if(el.Leader_id === session.id) { %>
+                    <td>팀장</td>
+                    <% } if(// 만약 이 팀이 나에게 초대를 보낸 팀이라면) { %>
+                    <td>팀 초대받음</td><% } %>
+                    <div class="btn-group">
+                            <button class="btn btn-primary" type = "submit" value = <%= el.Tid %> >팀으로 이동</button>
+                    </div>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+    $("#waiting_team_table tr").click(function(){  
+    var tr = $(this);
+    var td = tr.children();
+    var team_or_id = td.eq(0).text();
+    alert(team_or_id);
+    openOverlay('idOverlay');
+    });
+
+    function openOverlay(contentId){
+        document.getElementById(contentId).style.display="block";
+    }
+
+    function closeOverlay(contentId){
+        document.getElementById(contentId).style.display="none";
+    }
+    </script>
+
+
+  </form>
+
+
+  <script>
+    function allow_complete_request() {
+        alert("allow");
+    }
+    </script>
+    <script>
+    function addRow(){
+        //var newtable = $('free_reg_lang_table');
+        //newtable = document.getElementById('free_reg_lang_table');  //행을 추가할 테이블
+        mytable = document.getElementById('langTbody');  //행을 추가할 테이블
+        row = mytable.insertRow(mytable.rows.length);  //추가할 행
+        cell1 = row.insertCell(0);  //실제 행 추가 여기서의 숫자는 컬럼 수
+        cell2 = row.insertCell(1);
+        //cell1.innerHTML = "<td class='al fontB'><input type='text' placeholder='언어를 입력하세요' name='language' size='40'></td>"; //추가한 행에 원하는  요소추가
+        cell1.innerHTML = "<td><select style= 'width:200px; height:40px;'><option>Python</option><option>Java</option><option>C/C++</option></td>"
+        //cell2.innerHTML = "<td><input type='checkbox' name='service'/></td>";
+        cell2.innerHTML = "<td><select style= 'width:35px; height:35px;'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></td>"
+        rowLen = mytable.rows.length;
+        //alert(newtable.rows[0].cells[1].innerHTML);
+        alert("추가 rowLen: "+rowLen)
+        alert("언어: "+mytable.rows.item(rowLen-1).cells.item(0).firstChild.value+" 능숙도: "+mytable.rows.item(rowLen-1).cells.item(1).firstChild.value)
+    }
+    function delRow(){
+        mytable = document.getElementById('langTbody');  //행을 추가할 테이블
+        mytable.deleteRow( mytable.rows.length-1 ); // 하단 삭제
+        //alert(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
+        rowLen = mytable.rows.length;
+        alert("삭제 rowLen: "+rowLen)
+    }
+    </script>
+
+
 
 <% include footer.ejs %>
