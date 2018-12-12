@@ -1,0 +1,60 @@
+<% title = "CFHS :: free" %>
+<% menu = "index" %>
+<% include header.ejs %>
+<style>
+.sortable{
+    cursor: pointer;
+}
+</style>
+<form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/register/first_step" style="padding-top:120px">
+    <div>
+        <table id="account_table" class="table table-hover text-center sortable">
+            <thead>
+                <th>계정목록</th>
+                <% var ami_leader = true; 
+                 var ami_invited = true; %>
+            </thead>
+            <tbody> 
+            <tr><td>user1</td></tr>
+            <tr><td>user2</td></tr>
+            <tr><td>user3</td></tr>
+            <tr><td>user4</td></tr>
+            <tr><td>user5</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</form>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+    $("#account_table tr").click(function(){  
+    var ami_leader = true
+    var tr = $(this);
+    var td = tr.children();
+    var team_or_id = td.eq(0).text();
+    alert(team_or_id);
+    openOverlay('idOverlay');
+    });
+
+    function openOverlay(contentId){
+        document.getElementById(contentId).style.display="block";
+    }
+
+    function closeOverlay(contentId){
+        document.getElementById(contentId).style.display="none";
+    }
+    function kick(userId){
+        alert("kick "+userId);
+    }
+    function allowInvitation(tName){
+        alert("allow invitation of "+tName);
+    }
+    function declineInvitation(tName){
+        alert("decline invitation of "+tName);
+    }
+    </script>
+
+
+
+
+<% include footer.ejs %>
