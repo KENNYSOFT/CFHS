@@ -33,7 +33,7 @@ router.post('/first_step', wrapper.asyncMiddleware(async (req, res, next) => {
         else {
             await db.getQueryResult('INSERT INTO user(Password, Name, Uid, Usertype) VALUES (PASSWORD(?), ?, ?, ?);', [req.body.pwd, req.body.name, req.body.U_id, 2]);
             await db.getQueryResult('INSERT INTO user_req(Pnumber, URid) VALUES (?, ?);', [req.body.Pnumber, req.body.U_id]);
-            res.render('fin_reg', {session : req.session});
+            res.render('finish', {session: req.session, finished: "의뢰자 회원가입"});
         }
     }
 
@@ -47,7 +47,7 @@ router.post('/second_step_free', wrapper.asyncMiddleware(async (req, res, next) 
   {
       await db.getQueryResult('INSERT INTO uses(Ulevel, UFid, Lname) VALUES (?, ?, ?);', [req.body["language_level_" + i], sess.tempId, req.body["language_name_" + i]]);
   }
-  res.render('fin_reg', {session : req.session});
+  res.render('finish', {session: req.session, finished: "프리랜서 회원가입"});
   res.end();
 }));
 
