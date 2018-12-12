@@ -4,28 +4,29 @@
 <form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/register/first_step">
     <div class="form-group">
       <label for="requester_label">의뢰자</label>
-      <label for="requester">김사장님</label>
+      <label for="requester"><%= rows[0].Name %></label>
     </div>
     <div class="form-group">
       <label for="reward_label">의뢰 금액</label>
-      <label for="reward">2000000</label>
+      <label for="reward"><%= rows[0].Price %></label>
     </div>
     <div class="form-group">
       <label for="start_date_label">개발 시작날짜</label>
-      <label for="start_date">2018-12-23</label>
+      <label for="start_date"><%= rows[0].Start_date %></label>
     </div>
     <div class="form-group">
       <label for="end_date_label">개발 종료날짜</label>
-      <label for="end_date">2019-05-22</label>
+      <label for="end_date"><%= rows[0].End_date %></label>
     </div>
     <div class="form-group">
       <label for="career_year_label">최소 경력</label>
-      <label for="career_year">3</label>
+      <label for="career_year"><%= rows[0].Required_career_year %></label>
     </div>
     <div class="form-group" id="language">
       <label for="lang_label">프로그래밍 언어별 능숙도</label>
-      <label for="lang">Python 4</label>
-      <label for="lang">Java 3</label>
+        <% languages.forEach(function(e){ %>
+      <label for="lang"><%= e.Lname + ": " + e.Rlevel %></label>
+        <% }); %>
     </div>
     <div class="form-group">
       <label for="request_doc_label">의뢰문서</label><br>
@@ -33,11 +34,11 @@
     </div>
     <div class="form-group">
       <label for="max_free_label">최소 프리랜서 수</label><br>
-      <label for="max_free">2</label><br>
+      <label for="max_free"><%= rows[0].Required_min_count %></label><br>
     </div>
     <div class="form-group">
       <label for="min_free_label">최대 프리랜서 수</label><br>
-      <label for="min_free">4</label><br>
+      <label for="min_free"><%= rows[0].Required_max_count %></label><br>
     </div>
     <div class="form-group">
       <label for="current_state_label">상태</label><br>
@@ -48,8 +49,8 @@
       <input type="text" class="form-control" id="rate" name = "rate" placeholder="평점을 입력하세요">
     </div>
     <div class="form-group">
-      <label for="rate_label">완료요청 거절당함</label><br>
-      <label for="rate">너무 맘에 안들어용 다시 하셈</label><br>
+      <label for="rate_label">의뢰자의 메시지</label><br>
+      <label for="rate">거절합니다</label><br>
     </div>
 
     <% 

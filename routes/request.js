@@ -37,7 +37,8 @@ router.get('/sort/:legend/:order', wrapper.asyncMiddleware(async (req, res, next
 
 router.get('/detail/:Rid', wrapper.asyncMiddleware(async (req, res, next) =>  {
   var rows = await db.getQueryResult("SELECT * FROM request JOIN user ON request.URid = user.Uid WHERE Rid = ?;", [req.params.Rid]);
-  res.render('request_detail', {session: req.session, rows: rows});
+  var languages = await db.getQueryResult("SELECT * FROM requires JOIN request ON requires.Rid = request.Rid");
+  res.render('request_detail', {session: req.session, rows: rows, languages: languages});
 }));
 
 router.get('/make', wrapper.asyncMiddleware(async (req, res, next) =>  {
