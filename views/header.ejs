@@ -8,30 +8,36 @@
 <body>
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="#">CFHS</a>
+        <a class="navbar-brand" href="/">CFHS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
+                <% if(typeof(session.utype) != "undefined") { %>
                 <li class="nav-item<% if (menu === "index") { %> active<% } %>">
-                    <a class="nav-link" href="<% if (menu === "index") { %>#<% } else { %>/<% } %>">메인<% if (menu === "index") { %> <span class="sr-only">(현재)</span><% } %></a>
+                    <a class="nav-link" href="<% if (menu === "index") { %>/<% } else { %>/<% } %>">메인<% if (menu === "index") { %> <span class="sr-only">(현재)</span><% } %></a>
                 </li>
                 <li class="nav-item dropdown<% if (menu.startsWith("request")) { %> active<% } %>">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="requests">의뢰</a>
                     <div class="dropdown-menu" aria-labelledby="requests">
+                        <% if(session.utype == 2) {%>
                         <a class="dropdown-item<% if (menu === "request_make") { %> active<% } %>" href="<% if (menu === "request_make") { %>#<% } else { %>/request/make<% } %>">의뢰 올리기<% if (menu === "request_make") { %> <span class="sr-only">(현재)</span><% } %></a>
+                        <% } %>
                         <a class="dropdown-item<% if (menu === "request_list") { %> active<% } %>" href="<% if (menu === "request_list") { %>#<% } else { %>/request/list<% } %>">의뢰 목록 보기<% if (menu === "request_list") { %> <span class="sr-only">(현재)</span><% } %></a>
                     </div>
                 </li>
                 <li class="nav-item dropdown<% if (menu.startsWith("team")) { %> active<% } %>">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="teams">팀</a>
                     <div class="dropdown-menu" aria-labelledby="teams">
+                        <% if(session.utype == 1) { %>
                         <a class="dropdown-item<% if (menu === "team_make") { %> active<% } %>" href="<% if (menu === "team_make") { %>#<% } else { %>/team/make<% } %>">팀 만들기<% if (menu === "team_make") { %> <span class="sr-only">(현재)</span><% } %></a>
+                        <% } %>
                         <a class="dropdown-item<% if (menu === "team_list") { %> active<% } %>" href="<% if (menu === "team_list") { %>#<% } else { %>/team/list<% } %>">나의 팀 목록 보기<% if (menu === "team_list") { %> <span class="sr-only">(현재)</span><% } %></a>
                     </div>
                 </li>
+                <% } %>
             </ul>
 <% if (typeof(session.uid) === "undefined") { %>
             <form class="form-inline my-2 my-lg-0 navbar-nav" method="post" action="/api/login">
@@ -39,6 +45,7 @@
                 <input class="form-control mr-sm-2 nav-link active" type="password" placeholder="비밀번호" style="width: 70px" name="password" required>
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">로그인</button>
             </form>
+            <a type=button class="btn btn-secondary my-2 my-sm-0" href="<% if (menu === "register") { %>#<% }else{ %>/register<% } %>">회원가입</a>
 <% } else { %>
             <form class="form-inline my-2 my-lg-0 navbar-nav" action="/api/logout">
                 <a class="nav-link" href="#"><%= session.uname %>님 (<%= ["관리자", "프리랜서", "의뢰자"][session.utype] %>)</a>
@@ -48,7 +55,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container" style="padding-top: 90px;">
 <% switch (session.message) { case "login_success": %>
 <div class="alert alert-dismissible alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>

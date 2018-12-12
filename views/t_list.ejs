@@ -1,0 +1,22 @@
+<% title = "CFHS :: 팀 목록" %>
+<% menu = "team_list" %>
+<% include header.ejs %>
+
+<table class = "table">
+    <thead>
+        <tr>
+            <th>팀 이름</th>
+            <th>팀장 id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% rows.forEach(function(el) { %> 
+        <tr>
+            <td>165</td> <!--el.Tname-->
+            <td>test</td> <!--el.Leader_id-->
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<% include footer.ejs %>

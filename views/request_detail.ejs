@@ -1,0 +1,205 @@
+<% title = "CFHS :: free" %>
+<% menu = "index" %>
+<% include header.ejs %>
+<form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/register/first_step" style="padding-top:120px">
+    <div class="form-group">
+      <label for="requester_label">의뢰자</label>
+      <label for="requester">김사장님</label>
+    </div>
+    <div class="form-group">
+      <label for="reward_label">의뢰 금액</label>
+      <label for="reward">2000000</label>
+    </div>
+    <div class="form-group">
+      <label for="start_date_label">개발 시작날짜</label>
+      <label for="start_date">2018-12-23</label>
+    </div>
+    <div class="form-group">
+      <label for="end_date_label">개발 종료날짜</label>
+      <label for="end_date">2019-05-22</label>
+    </div>
+    <div class="form-group">
+      <label for="career_year_label">최소 경력</label>
+      <label for="career_year">3</label>
+    </div>
+    <div class="form-group" id="language">
+      <label for="lang_label">프로그래밍 언어별 능숙도</label>
+      <label for="lang">Python 4</label>
+      <label for="lang">Java 3</label>
+    </div>
+    <div class="form-group">
+      <label for="request_doc_label">의뢰문서</label><br>
+      <label for="request_doc">의뢰문서</label><br>
+    </div>
+    <div class="form-group">
+      <label for="max_free_label">최소 프리랜서 수</label><br>
+      <label for="max_free">2</label><br>
+    </div>
+    <div class="form-group">
+      <label for="min_free_label">최대 프리랜서 수</label><br>
+      <label for="min_free">4</label><br>
+    </div>
+    <div class="form-group">
+      <label for="current_state_label">상태</label><br>
+      <label for="current_state">내가 진행중</label><br>
+    </div>
+    <div class="form-group">
+      <label for="rate_label">점수</label><br>
+      <input type="text" class="form-control" id="rate" name = "rate" placeholder="평점을 입력하세요">
+    </div>
+    <div class="form-group">
+      <label for="rate_label">완료요청 거절당함</label><br>
+      <label for="rate">너무 맘에 안들어용 다시 하셈</label><br>
+    </div>
+
+    <% 
+    var appliable = true;
+    var inprogress = true;
+    %>
+
+    <div>
+    <% if(appliable==true && inprogress ==false){ %>
+    <button type="submit" class="btn btn-default">수주 신청</button>
+    <%} else if(appliable==true && inprogress ==true){ %>
+    <button type="submit" class="btn btn-default">완료 요청</button>
+    <% } else { %>
+    <button type="submit" disabled='disabled' class="btn btn-default">완료 요청</button>
+    <% } %>
+    </div>
+
+
+  </form>
+
+
+  <script>
+    function tocheckpw2() {
+        var age = document.getElementById("age").value;
+        var major = document.getElementById("major").value;
+        var cy = document.getElementById("career_year").value;
+        //var lang = document.getElementsByName("language");
+        var set_type = null;
+        var lang_table = document.getElementById('langTbody');  //행을 추가할 테이블
+        var lang_rows = lang_table.rows;
+        //alert(lang_rows.length);
+
+        //console.log(lang);
+
+        if(age.length == 0){
+            document.getElementById('agel').innerHTML = '나이를 입력해주세요';
+            return false;
+        }
+        else{
+            document.getElementById('agel').innerHTML = '';
+        }
+        if(major.length == 0){
+            document.getElementById('majorl').innerHTML = '전공을 입력해주세요';
+            return false;
+        }
+        else {
+            document.getElementById('majorl').innerHTML = '';
+        }
+        if(cy.length == 0){
+            document.getElementById('cyl').innerHTML = '경력을 입력해주세요.';
+            return false;
+        }
+        else{
+            document.getElementById('cyl').innerHTML = '';
+        }
+        if(lang_rows.length == 0){
+            alert("언어를 입력해주세요!");
+            return false;
+        }
+        var py_flag = false;
+        var jv_flag = false;
+        var cp_flag = false;
+        for(i=0;i<lang_rows.length;i++)
+        {
+            //alert("lang alert: "+lang_rows.item(i).cells.item(0).firstChild.value);
+            if(lang_rows.item(i).cells.item(0).firstChild.value == "Python")
+            { 
+                if (py_flag == true)
+                {
+                    alert("언어를 적절하게 입력해주세요!");
+                    return false;
+                }
+                py_flag = true; 
+                //alert("py_flag -> true");
+            }
+            else if(lang_rows.item(i).cells.item(0).firstChild.value == "Java")
+            { 
+                if (jv_flag == true)
+                {
+                    alert("언어를 적절하게 입력해주세요!");
+                    return false;
+                }
+                jv_flag = true; 
+            }
+            else if(lang_rows.item(i).cells.item(0).firstChild.value == "C/C++")
+            { 
+                if (cp_flag == true)
+                {
+                    alert("언어를 적절하게 입력해주세요!");
+                    return false;
+                }
+                cp_flag = true; 
+            }
+            //alert("value:",+lang_rows.item(i).cells.item(0).firstChild.value)
+            //언어가 유효한 값인지 확인해야함!
+            //alert("i: "+i);
+            if(lang_rows.item(i).cells.item(0).firstChild.value == "")
+            {
+                alert("언어를 적절하게 입력해주세요!");
+                return false;
+            }
+
+            //alert(lang_rows.item(i).cells.item(0).firstChild.value);
+        }
+
+    }
+    /*
+    function add_feed()
+    {
+        var div1 = document.createElement('div');
+        // Get template data
+        div1.innerHTML = document.getElementById('newlinktpl').innerHTML;
+        // append to our form, so that template data
+        //become part of form
+        document.getElementById('newlink').appendChild(div1);
+    }
+    */
+    </script>
+    <script>
+    function addRow(){
+        //var newtable = $('free_reg_lang_table');
+        //newtable = document.getElementById('free_reg_lang_table');  //행을 추가할 테이블
+
+        mytable = document.getElementById('langTbody');  //행을 추가할 테이블
+        row = mytable.insertRow(mytable.rows.length);  //추가할 행
+
+
+        cell1 = row.insertCell(0);  //실제 행 추가 여기서의 숫자는 컬럼 수
+        cell2 = row.insertCell(1);
+
+        //cell1.innerHTML = "<td class='al fontB'><input type='text' placeholder='언어를 입력하세요' name='language' size='40'></td>"; //추가한 행에 원하는  요소추가
+        cell1.innerHTML = "<td><select style= 'width:200px; height:40px;'><option>Python</option><option>Java</option><option>C/C++</option></td>"
+        //cell2.innerHTML = "<td><input type='checkbox' name='service'/></td>";
+        cell2.innerHTML = "<td><select style= 'width:35px; height:35px;'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></td>"
+        rowLen = mytable.rows.length;
+        //alert(newtable.rows[0].cells[1].innerHTML);
+        alert("추가 rowLen: "+rowLen)
+        alert("언어: "+mytable.rows.item(rowLen-1).cells.item(0).firstChild.value+" 능숙도: "+mytable.rows.item(rowLen-1).cells.item(1).firstChild.value)
+    }
+    function delRow(){
+        mytable = document.getElementById('langTbody');  //행을 추가할 테이블
+
+        mytable.deleteRow( mytable.rows.length-1 ); // 하단 삭제
+        //alert(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
+        rowLen = mytable.rows.length;
+        alert("삭제 rowLen: "+rowLen)
+    }
+
+    </script>
+
+
+
+<% include footer.ejs %>
