@@ -16,7 +16,7 @@
     </thead>
     <tbody>
         <% rows.forEach(function(el) { %> 
-        <tr>
+        <tr class="clickable-row" data-href="/request/detail/<%= el.Rid %>">
             <td><%= el.Rid %></td>
             <td><%= el.Name %></td>
         </tr>

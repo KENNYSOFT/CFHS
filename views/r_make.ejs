@@ -2,7 +2,7 @@
 <% menu = "R_make" %>
 <% include header.ejs %>
 <% if(session.utype === 2) { %>
-<form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/request/make" style="padding-top:120px">
+<form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/request/make">
     <div class="form-group">
       <label for="cost">의뢰 금액</label>
       <input type="number" class="form-control" id="cost" name = "cost" placeholder="금액을 입력하세요">
