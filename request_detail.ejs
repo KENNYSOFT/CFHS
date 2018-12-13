@@ -1,0 +1,140 @@
+<% title = "CFHS :: free" %>
+<% menu = "index" %>
+<% include header.ejs %>
+
+<div class="form-group">
+    <label for="requester_label">의뢰자</label>
+    <label for="requester"><%= rows[0].Name %></label>
+</div>
+<div class="form-group">
+    <label for="reward_label">의뢰 금액</label>
+    <label for="reward"><%= rows[0].Price %></label>
+</div>
+<div class="form-group">
+    <label for="start_date_label">개발 시작날짜</label>
+    <label for="start_date"><%= rows[0].Start_date %></label>
+</div>
+<div class="form-group">
+    <label for="end_date_label">개발 종료날짜</label>
+    <label for="end_date"><%= rows[0].End_date %></label>
+</div>
+<div class="form-group">
+    <label for="career_year_label">최소 경력</label>
+    <label for="career_year"><%= rows[0].Required_career_year %></label>
+</div>
+<div class="form-group" id="language">
+    <label for="lang_label">프로그래밍 언어별 능숙도</label>
+    <% languages.forEach(function(e){ %>
+    <label for="lang"><%= e.Lname + ": " + e.Rlevel %></label>
+    <% }); %>
+</div>
+<div class="form-group">
+    <label for="request_doc_label">의뢰문서</label><br>
+    <label for="request_doc">의뢰문서</label><br>
+</div>
+<div class="form-group">
+    <label for="max_free_label">최소 프리랜서 수</label><br>
+    <label for="max_free"><%= rows[0].Required_min_count %></label><br>
+</div>
+<div class="form-group">
+    <label for="min_free_label">최대 프리랜서 수</label><br>
+    <label for="min_free"><%= rows[0].Required_max_count %></label><br>
+</div>
+<div class="form-group">
+    <label for="current_state_label">상태</label><br>
+    <% if(status === 0){ %>
+    <label for="current_state">모집중</label><br>
+    <% } else if(status === 1) { %>
+    <label for="current_state">신청 중</label><br>
+    <% } else if(status === 2) { %>
+        <label for="current_state">진행 중</label><br>
+    <% } else if(status === 3) { %>
+        <label for="current_state">완료 요청 중</label><br>
+    <% } else if(status === 4) { %>
+        <label for="current_state">완료 신청 거절</label><br>
+    <% } else if(status === 5) { %>
+        <label for="current_state">완료</label><br>
+    <% } %>
+</div>
+<% if((session.utype === 1 && status === 5)){ %>
+<form class="well" data-ajax="false" method="post" action="/request/end">
+<div class="form-group">
+    <label for="rate_label">점수</label><br>
+    <input type="number" class="form-control" id="rate" name = "rate" placeholder=0>
+    <input type = "hidden" name = "rid" value = "<%= rows[0].Rid %>" >
+    <button class="btn btn-primary" name = "end" type = "submit">수락</button>
+</div>
+</form>
+<% } %>
+
+<% if(session.utype !== 1){ %> 
+<div>
+    <table id="waiting_team_table" class="table table-hover text-center">
+        <thead>
+            <th><% if(status === 0) { %>팀 목록<% } else { %>완료요청<% } %></th>
+        </thead>
+        <tbody>
+        <% if((session.uid === rows[0].URid && session.utype === 2) || session.utype === 0) { %>
+            <% rows1.forEach(function(el) { %>
+            <tr>
+                <td><%= el.Tname %></td>
+                <% if(session.utype === 2 && status === 1) { %>
+                <td>
+                <form class="well" data-ajax="false" method="post" action="/request/accept">
+                    <div class="btn-group">
+                        <input type = "hidden" name = "rid" value = "<%= rows[0].Rid %>" >
+                        <button class="btn btn-primary" name = "accept" type = "submit" value = "<%= el.Tname %>">수락</button>
+                    </div>
+                </form>
+                </td>
+                <% } %>
+            </tr>
+            <% }); %>
+
+
+
+                <% if(status === 3){ %>
+                    <form class="well" data-ajax="false" method="post" action="/request/acdec">
+                        <div class="btn-group">
+                                <label for="rate_label">점수</label><br>
+                                <input type="number" class="form-control" id="rate" name = "rate" placeholder=0>
+                            <input type="text" name = "com">
+                            <input type = "hidden" name = "rid" value = "<%= rows[0].Rid %>" >
+                            <button class="btn btn-primary" name = "acdec" type = "submit" value = "0">수락</button>
+                            <button class="btn btn-primary" name = "acdec" type = "submit" value = "1">거절</button>
+                        </div>
+                    </form>
+                <% } %>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+<% } %>
+ 
+<form class="well" data-ajax="false" method="post" action="/request/apply">
+    <%
+    //var appliable = true;
+    //var inprogress = false;
+    %>
+    <% if(session.utype === 1) { %>
+    <div>
+    <% if(status === 0){ %>
+    <input type = "hidden" name = "check_type" value = "0">
+    <button type="submit" name = 'rid' class="btn btn-default" value = "<%= rows[0].Rid %>">수주 신청</button>
+    <% } else if(status === 2 || status === 4){ %>
+    <input type = "hidden" name = "check_type" value = "1">
+    <button type="submit" name = 'rid' class="btn btn-default" value = "<%= rows[0].Rid %>">완료 요청</button>
+    <% } %>
+    <% if(status === 4){ %>
+    <div class="form-group">
+        <label for="rate_label">의뢰자의 메시지</label><br>
+        <label for="rate"><%= rows[0].Comment %></label><br>
+    </div>
+    <% } %>
+    </div>
+    <% } %>
+
+  </form>
+
+
+<% include footer.ejs %>

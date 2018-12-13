@@ -1,0 +1,36 @@
+<% title = "CFHS :: 팀 생성" %>
+<% menu = "team_make" %>
+<% include header.ejs %>
+
+<!--
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+-->
+
+<!--팀 이름과 session.Uid를 이용해 팀 table을 채웁니다-->
+<form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/team/make">
+  <div class="form-group">
+    <label for="name">팀 이름</label>
+    <input type="text" class="form-control" id="t_name" name = "t_name" placeholder="팀 이름을 입력하세요">
+    <p id="namel" style="color:red;"></p>
+  </div>
+  <button type="submit" class="btn btn-default">신청</button>
+</form>
+
+  <script>
+
+    function tocheckpw2() {
+        var name = document.getElementById("t_name").value;
+
+        if(name.length == 0){
+            document.getElementById('namel').innerHTML = '이름을 입력해주세요';
+            return false;
+        }
+        else{
+            document.getElementById('namel').innerHTML = '';
+        }
+    }
+  </script>
+
+<% include footer.ejs %>

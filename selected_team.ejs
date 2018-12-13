@@ -1,0 +1,58 @@
+<% title = "CFHS :: 팀원목록" %>
+<% menu = "team_list" %>
+<% include header.ejs %>
+
+<form class="well" data-ajax="false" method="post" action="/team/delete">
+<table class = "table">
+    <thead>
+        <tr>
+            <th>팀원 목록</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% rows.forEach(function(el) { %> 
+        <tr>
+            <td><%= el.UFid %></td>
+            <% if(el.UFid !== session.uid) { %>
+            <td><div class="btn-group">
+                    <button class="btn btn-primary" name="teammemeber" type = "submit" value = "<%= el.Uid %>">팀원 삭제</button>
+            </div></td>
+            <% } %>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+</form>
+
+<br><br>
+<form class="well" data-ajax="false" method="post" action="/team/suggest">
+    <table class = "table" >
+        <tr>
+            <td>
+                <input class="form-control mr-sm-2 nav-link active" type="text" placeholder="유저 아이디" style="width: 70px" name="id" required>
+                <% if(rows.length !== 0) { %>
+                <input type = "hidden" name = "id2" value = "<%= rows[0].Tname %>">
+                <% } %>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn btn-primary" type = "submit">팀원 신청</button>
+                </div>
+                <% if(temp_err === true) { %>
+                <p style="color:red;">수행할 수 없는 신청입니다</p>
+                <% } %>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<br><br><br>
+
+
+<form class="well" data-ajax="false" method="post" action="/team/request">
+    <div class="btn-group">
+            <button class="btn btn-primary" name = "team_request" type = "submit" value = session.id></button>"></button>
+        </div>
+</form>
+
+<% include footer.ejs %>

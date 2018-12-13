@@ -1,0 +1,38 @@
+<% title = "CFHS :: free" %>
+<% menu = "index" %>
+<% include header.ejs %>
+
+
+<form class="well" data-ajax="false" method="post" action="/team/selected_list">
+
+    <div>
+        <table id="waiting_team_table" class="table table-hover text-center">
+            <thead>
+                <th>팀 목록</th>
+            </thead>
+            <tbody>
+
+
+                <% rows.forEach(function(el) { %>
+                <tr>
+                    <td><%= el.Tname %></td>
+                    <% if(el.Leader_id === session.uid) { %>
+                    <td>팀장</td>
+                    <% } %>
+                    <td>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" name = "move" type = "submit" value = "<%=el.Tname %>"> 팀으로 이동</button>
+                    </div>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+
+  </form>
+
+<% include footer.ejs %>

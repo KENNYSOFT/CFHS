@@ -1,0 +1,34 @@
+<% title = "CFHS :: 의뢰목록" %>
+<% menu = "request_list" %>
+<% include header.ejs %>
+
+<div class="btn-group">
+    <button class="btn btn-primary" onclick="window.location.href='/request/sort/start_date/<%= typeof(legend) !== "undefined" && legend === "start_time" && typeof(order) !== "undefined" && order === "asc" ? "desc" : "asc" %>'">시작 날짜 순으로 정렬</button>
+    <button class="btn btn-primary" onclick="window.location.href='/request/sort/price/<%= typeof(legend) !== "undefined" && legend === "price" && typeof(order) !== "undefined" && order === "asc" ? "desc" : "asc" %>'">가격 순으로 정렬</button>
+</div>
+
+<table class = "table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>의뢰번호</th>
+            <th>의뢰인</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% rows.forEach(function(el) { %> 
+        <tr class="clickable-row" data-href="/request/detail/<%= el.Rid %>">
+            <td><%= el.Rid %></td>
+            <td><%= el.Name %></td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<div class="btn-group">
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/finding'">구인중인 의뢰</button>
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/applicable'">신청 가능한 의뢰</button>
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/proceeding'">진행중인 의뢰</button>
+        <button class="btn btn-primary" onclick="window.location.href='/request/search/requested'">신청한 의뢰</button>
+</div>
+
+<% include footer.ejs %>
