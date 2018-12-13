@@ -11,6 +11,7 @@ router.post('/login', wrapper.asyncMiddleware(async (req, res, next) => {
   {
     sess.uid = rows[0].Uid;
     sess.uname = rows[0].Name;
+    sess.tname = rows[0].Uid;
     sess.utype = rows[0].Usertype;
     sess.message = 'login_success';
   }
@@ -23,6 +24,7 @@ router.get('/logout', function (req, res, next) {
   sess.uid = undefined;
   sess.uname = undefined;
   sess.utype = undefined;
+  sess.tname = undefined;
   sess.message = 'logout_success';
   res.writeHead(302, {'Location': '/'});
   res.end();
