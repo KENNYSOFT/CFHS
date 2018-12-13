@@ -18,7 +18,7 @@ router.get('/search/:type', wrapper.asyncMiddleware(async (req, res, next) =>  {
       rows = await db.getQueryResult("SELECT * FROM request JOIN user ON request.URid = user.Uid WHERE Tname = 'admin';");
       break;
     case "applicable":
-      rows = await db.getQueryResult("SELECT Career_year FROM user_free WHERE UFid = ?;", [req.session.Uid]);
+      rows = await db.getQueryResult("SELECT Career_year FROM user_free WHERE UFid = ?;", [req.session.uid]);
       var career_year = rows[0].Career_year;
       rows = await db.getQueryResult("SELECT * FROM (SELECT * FROM request JOIN user ON request.URid = user.Uid) A WHERE Tname = 'admin' AND Required_min_count = 1 AND Required_max_count = 1 AND Required_career_year <= " + career_year + " AND NOT EXISTS (SELECT * FROM requires B WHERE B.Rid = A.Rid AND NOT EXISTS (SELECT * FROM uses C WHERE B.Lname = C.Lname AND C.UFid = ? AND C.Ulevel >= B.Rlevel));", [req.session.Uid]);
       break;
