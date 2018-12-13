@@ -3,7 +3,7 @@
 <% include header.ejs %>
 
 <div class="btn-group">
-    <button class="btn btn-primary" onclick="window.location.href='/request/sort/start_time/<%= typeof(legend) !== "undefined" && legend === "start_time" && typeof(order) !== "undefined" && order === "asc" ? "desc" : "asc" %>'">시작 날짜 순으로 정렬</button>
+    <button class="btn btn-primary" onclick="window.location.href='/request/sort/start_date/<%= typeof(legend) !== "undefined" && legend === "start_time" && typeof(order) !== "undefined" && order === "asc" ? "desc" : "asc" %>'">시작 날짜 순으로 정렬</button>
     <button class="btn btn-primary" onclick="window.location.href='/request/sort/price/<%= typeof(legend) !== "undefined" && legend === "price" && typeof(order) !== "undefined" && order === "asc" ? "desc" : "asc" %>'">가격 순으로 정렬</button>
 </div>
 
