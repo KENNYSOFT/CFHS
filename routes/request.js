@@ -49,7 +49,7 @@ router.get('/make', wrapper.asyncMiddleware(async (req, res, next) =>  {
 
 router.post('/make', wrapper.asyncMiddleware(async (req, res, next) =>  {
   await db.getQueryResult("INSERT INTO request(Required_min_count, Required_max_count, Start_date, End_date, Start_develop_date, End_develop_date, Price, Worker_score, Required_career_year, Requester_score, Tname, URid) VALUES (?, ?, ?, ?, NULL, NULL, ?, 0, ?, 0, 'admin', ?);"
-    ,[req.body.minimum, req.body.maximum, req.body.start, req.body.end, req.body.cost, req.body.career_year, req.session.Uid]);
+    ,[req.body.minimum, req.body.maximum, req.body.start, req.body.end, req.body.cost, req.body.career_year, req.session.uid]);
   res.render('finish', {session: req.session, finished: "의뢰 생성"});
 }));
 
