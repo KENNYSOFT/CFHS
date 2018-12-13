@@ -30,7 +30,9 @@
         <tr>
             <td>
                 <input class="form-control mr-sm-2 nav-link active" type="text" placeholder="유저 아이디" style="width: 70px" name="id" required>
+                 <% if(rows.length !== 0) { %>
                 <input type = "hidden" name = "id2" value = "<%= rows[0].Tname %>">
+                <% } %>
             </td>
             <td>
                 <div class="btn-group">
