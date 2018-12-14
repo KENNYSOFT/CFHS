@@ -121,7 +121,7 @@
     <% if(status === 0){ %>
     <input type = "hidden" name = "check_type" value = "0">
     <button type="submit" name = 'rid' class="btn btn-default" value = "<%= rows[0].Rid %>">수주 신청</button>
-    <% } else if(status === 2 || status === 4)&& rows[0].Tname === session.tname){ %>
+    <% } else if((status === 2 || status === 4)&& rows[0].Tname === session.tname){ %>
     <input type = "hidden" name = "check_type" value = "1">
     <button type="submit" name = 'rid' class="btn btn-default" value = "<%= rows[0].Rid %>">완료 요청</button>
     <% } %>
