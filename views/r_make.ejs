@@ -5,12 +5,12 @@
 <form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/request/make">
     <div class="form-group">
       <label for="cost">의뢰 금액</label>
-      <input type="number" class="form-control" id="cost" name="cost" placeholder="금액을 입력하세요">
+      <input type="number" class="form-control" id="cost" name = "cost" placeholder="금액을 입력하세요">
       <p id="costl" style="color:red;"></p>
     </div>
     <div class="form-group">
       <label for="start">개발 시작 날짜</label>
-      <input type="date" class="form-control" id="start" name="start" placeholder="개발 시작 날짜를 입력하세요">
+      <input type="date" class="form-control" id="start" name = "start" placeholder="개발 시작 날짜를 입력하세요">
       <p id="startl" style="color:red;"></p>
     </div>
     <div class="form-group">
@@ -35,7 +35,7 @@
     </div>
     <div class="form-group">
       <label for="contract">의뢰문서</label><br>
-      <input type="file" multiple class="form-control" id="contract" name="contract" placeholder="의뢰문서를 업로드하세요">
+      <input type="file" multiple class="form-control" id="contract" name = "contract" placeholder="의뢰문서를 업로드하세요">
       <p id="contl" style="color:red;"></p>
     </div>
 
@@ -141,7 +141,7 @@
         }
 
         if(lang_rows.length === 0){
-            console.log("언어를 입력해주세요!");
+            alert("언어를 입력해주세요!");
             return false;
         }
         var py_flag = false;
@@ -149,22 +149,22 @@
         var cp_flag = false;
         for(i=0;i<lang_rows.length;i++)
         {
-            //console.log("lang alert: "+lang_rows.item(i).cells.item(0).firstChild.value);
+            //alert("lang alert: "+lang_rows.item(i).cells.item(0).firstChild.value);
             if(lang_rows.item(i).cells.item(0).firstChild.value === "Python")
             { 
                 if (py_flag === true)
                 {
-                    console.log("언어를 적절하게 입력해주세요!");
+                    alert("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 py_flag = true; 
-                //console.log("py_flag -> true");
+                //alert("py_flag -> true");
             }
             else if(lang_rows.item(i).cells.item(0).firstChild.value === "Java")
             { 
                 if (jv_flag === true)
                 {
-                    console.log("언어를 적절하게 입력해주세요!");
+                    alert("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 jv_flag = true; 
@@ -173,21 +173,21 @@
             { 
                 if (cp_flag === true)
                 {
-                    console.log("언어를 적절하게 입력해주세요!");
+                    alert("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 cp_flag = true; 
             }
-            //console.log("value:",+lang_rows.item(i).cells.item(0).firstChild.value)
+            //alert("value:",+lang_rows.item(i).cells.item(0).firstChild.value)
             //언어가 유효한 값인지 확인해야함!
-            //console.log("i: "+i);
+            //alert("i: "+i);
             if(lang_rows.item(i).cells.item(0).firstChild.value === "")
             {
-                console.log("언어를 적절하게 입력해주세요!");
+                alert("언어를 적절하게 입력해주세요!");
                 return false;
             }
 
-            //console.log(lang_rows.item(i).cells.item(0).firstChild.value);
+            //alert(lang_rows.item(i).cells.item(0).firstChild.value);
         }
 
     }
@@ -221,7 +221,7 @@
         //cell2.innerHTML = "<td><input type='checkbox' name='service'/></td>";
         cell2.innerHTML = "<td><select style= 'width:35px; height:35px;' name='language_level_"+rowLen+"'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></td>"
 
-        //console.log(newtable.rows[0].cells[1].innerHTML);
+        //alert(newtable.rows[0].cells[1].innerHTML);
         console.log("추가 rowLen: "+rowLen)
         document.getElementById('langcnt').value = rowLen;
         console.log("언어: "+mytable.rows.item(rowLen-1).cells.item(0).firstChild.value+" 능숙도: "+mytable.rows.item(rowLen-1).cells.item(1).firstChild.value)
@@ -230,7 +230,7 @@
         mytable = document.getElementById('langTbody');  //행을 추가할 테이블
 
         mytable.deleteRow( mytable.rows.length-1 ); // 하단 삭제
-        //console.log(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
+        //alert(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
         rowLen = mytable.rows.length;
         document.getElementById('langcnt').value = rowLen;
         console.log("삭제 rowLen: "+rowLen)
