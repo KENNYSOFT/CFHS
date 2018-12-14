@@ -18,12 +18,20 @@ router.get('/modify', wrapper.asyncMiddleware(async (req, res, next) => {
 router.post('/modify', upload.any(), wrapper.asyncMiddleware(async (req, res, next) => {
   var sess = req.session;
   var files = req.files;
-  sess.uid = "user20001";//
+  //sess.uid = "user20001";//
   var pid = (await db.getQueryResult('INSERT INTO portfolio(Portfoliotype, UFid) VALUES (2, ?); SELECT LAST_INSERT_ID();', [sess.uid]))[1][0]["LAST_INSERT_ID()"];
   await db.getQueryResult('INSERT INTO outer_portfolio(POid) VALUES (?);', [pid]);
   for(var i = 0; i < files.length; ++i)
   {
     await db.getQueryResult('INSERT INTO file(Fpath, POid) VALUES (?, ?);', [files[i].path, pid]);
+  }
+  //await db.getQueryResult('UPDATE user (Name,Password) VALUES(?,?) WHERE Uid=?;', [req.body.name, req.body.pwd,sess.uid]);
+  await db.getQueryResult('UPDATE user SET Name=?,Password=password(?) WHERE Uid=?;', [req.body.name, req.body.pwd,sess.uid]);
+  await db.getQueryResult('UPDATE user_free SET Pnumber=?, age=?, Career_year=?, Major=? WHERE UFid=?;', [req.body.Pnumber,req.body.age,req.body.career_year, req.body.major,  sess.uid]);
+  //await db.getQueryResult('UPDATE user_free (Pnumber,age,Career_year,Major) VALUES(?,?,?,?) WHERE UFid=?;', [req.body.Pnumber,req.body.age,req.body.career_year, req.body.major,  sess.uid]);
+  for (var i = 1; i <= req.body.langcnt; ++i)
+  {
+      await db.getQueryResult('UPDATE uses(Ulevel, UFid, Lname) VALUES (?, ?, ?);', [req.body["language_level_" + i], sess.uid, req.body["language_name_" + i]]);
   }
   res.render('finish', {session: req.session, finished: "정보 수정"});
 }));
