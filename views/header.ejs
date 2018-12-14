@@ -15,7 +15,7 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-                <% if(typeof(session.utype) != "undefined") { %>
+                <% if(typeof(session.utype) !== "undefined") { %>
                 <li class="nav-item<% if (menu === "index") { %> active<% } %>">
                     <a class="nav-link" href="<% if (menu === "index") { %>/<% } else { %>/<% } %>">메인<% if (menu === "index") { %> <span class="sr-only">(현재)</span><% } %></a>
                 </li>
@@ -28,7 +28,7 @@
                         <a class="dropdown-item<% if (menu === "request_list") { %> active<% } %>" href="<% if (menu === "request_list") { %>#<% } else { %>/request/list<% } %>">의뢰 목록 보기<% if (menu === "request_list") { %> <span class="sr-only">(현재)</span><% } %></a>
                     </div>
                 </li>
-                <% if(session.utype != 2) { %>
+                <% if(session.utype !== 2) { %>
                 <li class="nav-item dropdown<% if (menu.startsWith("team")) { %> active<% } %>">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="teams">팀</a>
                     <div class="dropdown-menu" aria-labelledby="teams">

@@ -12,7 +12,7 @@
 <form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/team/make">
   <div class="form-group">
     <label for="name">팀 이름</label>
-    <input type="text" class="form-control" id="t_name" name = "t_name" placeholder="팀 이름을 입력하세요">
+    <input type="text" class="form-control" id="t_name" name="t_name" placeholder="팀 이름을 입력하세요">
     <p id="namel" style="color:red;"></p>
   </div>
   <button type="submit" class="btn btn-default">신청</button>
@@ -23,7 +23,7 @@
     function tocheckpw2() {
         var name = document.getElementById("t_name").value;
 
-        if(name.length == 0){
+        if(name.length === 0){
             document.getElementById('namel').innerHTML = '이름을 입력해주세요';
             return false;
         }

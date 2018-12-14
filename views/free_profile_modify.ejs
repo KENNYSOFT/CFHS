@@ -1,20 +1,20 @@
 <% title = "CFHS :: free" %>
 <% menu = "index" %>
 <% include header.ejs %>
-<form class="well" onsubmit="return tocheckpw2()" data-ajax="false" method="post" action="/register/first_step">
+<form class="well" onsubmit="return tocheckpw2()" data-ajax="false" enctype="multipart/form-data" method="post" action="/profile/modify">
   <div class="form-group">
     <label for="name">이름</label>
-    <input type="text" class="form-control" id="name" name = "name" placeholder="이름을 입력하세요">
+    <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요" value="<%= row[0].Name %>">
     <p id="namel" style="color:red;"></p>
   </div>
   <div class="form-group">
     <label for="phone">전화번호</label>
-    <input type="number" class="form-control" id="Pnumber" name = "Pnumber" placeholder="전화번호를 입력하세요">
+    <input type="number" class="form-control" id="Pnumber" name="Pnumber" placeholder="전화번호를 입력하세요" value="<%= row[0].Pnumber %>">
     <p id="pnl" style="color:red;"></p>
   </div>
   <div class="form-group">
     <label for="pwd1">패스워드</label>
-    <input type="password" class="form-control" id="pwd1" name = "pwd" placeholder="패스워드를 입력하세요">
+    <input type="password" class="form-control" id="pwd1" name="pwd" placeholder="패스워드를 입력하세요">
     <p id="pwl" style="color:red;"></p>
   </div>
   <div class="form-group">
@@ -24,29 +24,29 @@
   </div>
     <div class="form-group">
       <label for="age">나이</label>
-      <input type="text" class="form-control" id="age" name = "age" placeholder="나이을 입력하세요">
+      <input type="text" class="form-control" id="age" name="age" placeholder="나이를 입력하세요" value="<%= row[0].Age %>">
       <p id="agel" style="color:red;"></p>
     </div>
     <div class="form-group">
       <label for="major">전공 학과</label>
-      <input type="text" class="form-control" id="major" name = "major" placeholder="전공학과를 입력하세요">
+      <input type="text" class="form-control" id="major" name="major" placeholder="전공학과를 입력하세요" value="<%= row[0].Major %>">
       <p id="majorl" style="color:red;"></p>
     </div>
     <div class="form-group">
       <label for="career_year">개발 경력</label>
-      <input type="number" class="form-control" id="career_year" name="career_year" placeholder="아이디를 입력하세요">
+      <input type="number" class="form-control" id="career_year" name="career_year" placeholder="개발 경력을 입력하세요" value="<%= row[0].Career_year %>">
       <p id="cyl" style="color:red;"></p>
     </div>
     <!--<div class="form-group" id="language">
       <label for="pwd1">프로그래밍 언어별 능숙도</label>
-      <input type="text" class="form-control" name = "language[]" placeholder="언어를 입력하세요">
-      <input type="number" class="form-control" min = "1" max = "5" name = "language_P[]" placeholder="숙련도를 입력하세요">
+      <input type="text" class="form-control" name="language[]" placeholder="언어를 입력하세요">
+      <input type="number" class="form-control" min = "1" max = "5" name="language_P[]" placeholder="숙련도를 입력하세요">
       <p id="mjl" style="color:red;"></p>
     </div>
     -->
     <div class="form-group">
       <label for="portfolio">외적 포트폴리오 정보</label><br>
-      <input type="file" multiple class="form-control" id="portfolio" name = "portfolio" placeholder="포트폴리오를 입력하세요">
+      <input type="file" multiple class="form-control" id="portfolio" name="portfolio" placeholder="포트폴리오를 입력하세요">
       <p id="pfl" style="color:red;"></p><br>
     </div>
     <div class="form-group">
@@ -71,8 +71,8 @@
         </tbody>
 
     </table>
-    <button type="button" onclick="javascript:addRow()" class="gray">행추가</button>
-    <button type="button" onclick="javascript:delRow()" class="gray">행삭제</button>
+    <button type="button" onclick="addRow()" class="gray">행추가</button>
+    <button type="button" onclick="delRow()" class="gray">행삭제</button>
     </div>
     <div>
     <button type="submit" class="btn btn-default">다음</button>
@@ -97,28 +97,28 @@
 
         //console.log(lang);
 
-        if (pw != pwck) {
+        if (pw !== pwck) {
             document.getElementById('pwsame').innerHTML = '비밀번호가 틀렸습니다. 다시 입력해 주세요';
             return false;
         }
         else {
             document.getElementById('pwsame').innerHTML = '';
         }
-        if(name.length == 0){
+        if(name.length === 0){
             document.getElementById('namel').innerHTML = '이름을 입력해주세요';
             return false;
         }
         else{
             document.getElementById('namel').innerHTML = '';
         }
-        if(Pnumber.length == 0){
+        if(Pnumber.length === 0){
             document.getElementById('pnl').innerHTML = '전화번호를 입력해주세요.';
             return false;
         }
         else{
             document.getElementById('pnl').innerHTML = '';
         }
-        if(pw.length == 0){
+        if(pw.length === 0){
             document.getElementById('pwl').innerHTML = '패스워드를 입력해주세요.';
             return false;
         }
@@ -126,29 +126,29 @@
             document.getElementById('pwl').innerHTML = '';
         }
 
-        if(age.length == 0){
+        if(age.length === 0){
             document.getElementById('agel').innerHTML = '나이를 입력해주세요';
             return false;
         }
         else{
             document.getElementById('agel').innerHTML = '';
         }
-        if(major.length == 0){
+        if(major.length === 0){
             document.getElementById('majorl').innerHTML = '전공을 입력해주세요';
             return false;
         }
         else {
             document.getElementById('majorl').innerHTML = '';
         }
-        if(cy.length == 0){
+        if(cy.length === 0){
             document.getElementById('cyl').innerHTML = '경력을 입력해주세요.';
             return false;
         }
         else{
             document.getElementById('cyl').innerHTML = '';
         }
-        if(lang_rows.length == 0){
-            alert("언어를 입력해주세요!");
+        if(lang_rows.length === 0){
+            console.log("언어를 입력해주세요!");
             return false;
         }
         var py_flag = false;
@@ -156,45 +156,45 @@
         var cp_flag = false;
         for(i=0;i<lang_rows.length;i++)
         {
-            //alert("lang alert: "+lang_rows.item(i).cells.item(0).firstChild.value);
-            if(lang_rows.item(i).cells.item(0).firstChild.value == "Python")
+            //console.log("lang console.log: "+lang_rows.item(i).cells.item(0).firstChild.value);
+            if(lang_rows.item(i).cells.item(0).firstChild.value === "Python")
             { 
-                if (py_flag == true)
+                if (py_flag === true)
                 {
-                    alert("언어를 적절하게 입력해주세요!");
+                    console.log("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 py_flag = true; 
-                //alert("py_flag -> true");
+                //console.log("py_flag -> true");
             }
-            else if(lang_rows.item(i).cells.item(0).firstChild.value == "Java")
+            else if(lang_rows.item(i).cells.item(0).firstChild.value === "Java")
             { 
-                if (jv_flag == true)
+                if (jv_flag === true)
                 {
-                    alert("언어를 적절하게 입력해주세요!");
+                    console.log("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 jv_flag = true; 
             }
-            else if(lang_rows.item(i).cells.item(0).firstChild.value == "C/C++")
+            else if(lang_rows.item(i).cells.item(0).firstChild.value === "C/C++")
             { 
-                if (cp_flag == true)
+                if (cp_flag === true)
                 {
-                    alert("언어를 적절하게 입력해주세요!");
+                    console.log("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 cp_flag = true; 
             }
-            //alert("value:",+lang_rows.item(i).cells.item(0).firstChild.value)
+            //console.log("value:",+lang_rows.item(i).cells.item(0).firstChild.value)
             //언어가 유효한 값인지 확인해야함!
-            //alert("i: "+i);
-            if(lang_rows.item(i).cells.item(0).firstChild.value == "")
+            //console.log("i: "+i);
+            if(lang_rows.item(i).cells.item(0).firstChild.value === "")
             {
-                alert("언어를 적절하게 입력해주세요!");
+                console.log("언어를 적절하게 입력해주세요!");
                 return false;
             }
 
-            //alert(lang_rows.item(i).cells.item(0).firstChild.value);
+            //console.log(lang_rows.item(i).cells.item(0).firstChild.value);
         }
 
     }
@@ -227,17 +227,17 @@
         //cell2.innerHTML = "<td><input type='checkbox' name='service'/></td>";
         cell2.innerHTML = "<td><select style= 'width:35px; height:35px;'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></td>"
         rowLen = mytable.rows.length;
-        //alert(newtable.rows[0].cells[1].innerHTML);
-        alert("추가 rowLen: "+rowLen)
-        alert("언어: "+mytable.rows.item(rowLen-1).cells.item(0).firstChild.value+" 능숙도: "+mytable.rows.item(rowLen-1).cells.item(1).firstChild.value)
+        //console.log(newtable.rows[0].cells[1].innerHTML);
+        console.log("추가 rowLen: "+rowLen)
+        console.log("언어: "+mytable.rows.item(rowLen-1).cells.item(0).firstChild.value+" 능숙도: "+mytable.rows.item(rowLen-1).cells.item(1).firstChild.value)
     }
     function delRow(){
         mytable = document.getElementById('langTbody');  //행을 추가할 테이블
 
         mytable.deleteRow( mytable.rows.length-1 ); // 하단 삭제
-        //alert(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
+        //console.log(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
         rowLen = mytable.rows.length;
-        alert("삭제 rowLen: "+rowLen)
+        console.log("삭제 rowLen: "+rowLen)
     }
 
     </script>

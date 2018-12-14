@@ -10,6 +10,7 @@ var apiRouter = require('./routes/api');
 var registerRouter = require('./routes/register');
 var requestRouter = require('./routes/request');
 var teamRouter = require('./routes/team');
+var profileRouter = require('./routes/profile');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/api', apiRouter);
 app.use('/register', registerRouter);
 app.use('/request', requestRouter);
 app.use('/team', teamRouter);
+app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

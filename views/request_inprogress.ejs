@@ -118,7 +118,7 @@ color:#fff;
 
   <script>
     function allow_complete_request() {
-        alert("allow");
+        console.log("allow");
     }
     function tocheckpw2() {
         var age = document.getElementById("age").value;
@@ -128,33 +128,33 @@ color:#fff;
         var set_type = null;
         var lang_table = document.getElementById('langTbody');  //행을 추가할 테이블
         var lang_rows = lang_table.rows;
-        //alert(lang_rows.length);
+        //console.log(lang_rows.length);
 
         //console.log(lang);
 
-        if(age.length == 0){
+        if(age.length === 0){
             document.getElementById('agel').innerHTML = '나이를 입력해주세요';
             return false;
         }
         else{
             document.getElementById('agel').innerHTML = '';
         }
-        if(major.length == 0){
+        if(major.length === 0){
             document.getElementById('majorl').innerHTML = '전공을 입력해주세요';
             return false;
         }
         else {
             document.getElementById('majorl').innerHTML = '';
         }
-        if(cy.length == 0){
+        if(cy.length === 0){
             document.getElementById('cyl').innerHTML = '경력을 입력해주세요.';
             return false;
         }
         else{
             document.getElementById('cyl').innerHTML = '';
         }
-        if(lang_rows.length == 0){
-            alert("언어를 입력해주세요!");
+        if(lang_rows.length === 0){
+            console.log("언어를 입력해주세요!");
             return false;
         }
         var py_flag = false;
@@ -162,22 +162,22 @@ color:#fff;
         var cp_flag = false;
         for(i=0;i<lang_rows.length;i++)
         {
-            //alert("lang alert: "+lang_rows.item(i).cells.item(0).firstChild.value);
+            //console.log("lang alert: "+lang_rows.item(i).cells.item(0).firstChild.value);
             if(lang_rows.item(i).cells.item(0).firstChild.value == "Python")
             { 
                 if (py_flag == true)
                 {
-                    alert("언어를 적절하게 입력해주세요!");
+                    console.log("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 py_flag = true; 
-                //alert("py_flag -> true");
+                //console.log("py_flag -> true");
             }
             else if(lang_rows.item(i).cells.item(0).firstChild.value == "Java")
             { 
                 if (jv_flag == true)
                 {
-                    alert("언어를 적절하게 입력해주세요!");
+                    console.log("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 jv_flag = true; 
@@ -186,21 +186,21 @@ color:#fff;
             { 
                 if (cp_flag == true)
                 {
-                    alert("언어를 적절하게 입력해주세요!");
+                    console.log("언어를 적절하게 입력해주세요!");
                     return false;
                 }
                 cp_flag = true; 
             }
-            //alert("value:",+lang_rows.item(i).cells.item(0).firstChild.value)
+            //console.log("value:",+lang_rows.item(i).cells.item(0).firstChild.value)
             //언어가 유효한 값인지 확인해야함!
-            //alert("i: "+i);
+            //console.log("i: "+i);
             if(lang_rows.item(i).cells.item(0).firstChild.value == "")
             {
-                alert("언어를 적절하게 입력해주세요!");
+                console.log("언어를 적절하게 입력해주세요!");
                 return false;
             }
 
-            //alert(lang_rows.item(i).cells.item(0).firstChild.value);
+            //console.log(lang_rows.item(i).cells.item(0).firstChild.value);
         }
 
     }
@@ -233,17 +233,17 @@ color:#fff;
         //cell2.innerHTML = "<td><input type='checkbox' name='service'/></td>";
         cell2.innerHTML = "<td><select style= 'width:35px; height:35px;'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></td>"
         rowLen = mytable.rows.length;
-        //alert(newtable.rows[0].cells[1].innerHTML);
-        alert("추가 rowLen: "+rowLen)
-        alert("언어: "+mytable.rows.item(rowLen-1).cells.item(0).firstChild.value+" 능숙도: "+mytable.rows.item(rowLen-1).cells.item(1).firstChild.value)
+        //console.log(newtable.rows[0].cells[1].innerHTML);
+        console.log("추가 rowLen: "+rowLen)
+        console.log("언어: "+mytable.rows.item(rowLen-1).cells.item(0).firstChild.value+" 능숙도: "+mytable.rows.item(rowLen-1).cells.item(1).firstChild.value)
     }
     function delRow(){
         mytable = document.getElementById('langTbody');  //행을 추가할 테이블
 
         mytable.deleteRow( mytable.rows.length-1 ); // 하단 삭제
-        //alert(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
+        //console.log(mytable.rows.item(rowLen-1).cells.item(0).firstChild.value)
         rowLen = mytable.rows.length;
-        alert("삭제 rowLen: "+rowLen)
+        console.log("삭제 rowLen: "+rowLen)
     }
 
     </script>

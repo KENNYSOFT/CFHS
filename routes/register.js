@@ -25,13 +25,13 @@ router.post('/first_step', wrapper.asyncMiddleware(async (req, res, next) => {
             sess.tempUserType = req.body.user_t;
 
 
-            await db.getQueryResult('INSERT INTO user(Password, Name, Uid, Usertype) VALUES (PASSWORD(?), ?, ?, ?);', [req.body.pwd, req.body.name, req.body.U_id, 1]);
-            await db.getQueryResult('INSERT INTO team(Tname, Leader_id, Solo) VALUES (?, ?, ?);', [req.body.U_id, req.body.U_id, 1]);
+            await db.getQueryResult('INSERT INTO user(Password, Name, Uid, Usertype) VALUES (PASSWORD(?), ?, ?, 1);', [req.body.pwd, req.body.name, req.body.U_id]);
+            await db.getQueryResult('INSERT INTO team(Tname, Leader_id, Solo) VALUES (?, ?, 1);', [req.body.U_id, req.body.U_id]);
             res.render('free', {session: req.session});
         }
 
         else {
-            await db.getQueryResult('INSERT INTO user(Password, Name, Uid, Usertype) VALUES (PASSWORD(?), ?, ?, ?);', [req.body.pwd, req.body.name, req.body.U_id, 2]);
+            await db.getQueryResult('INSERT INTO user(Password, Name, Uid, Usertype) VALUES (PASSWORD(?), ?, ?, 2);', [req.body.pwd, req.body.name, req.body.U_id]);
             await db.getQueryResult('INSERT INTO user_req(Pnumber, URid) VALUES (?, ?);', [req.body.Pnumber, req.body.U_id]);
             res.render('finish', {session: req.session, finished: "의뢰자 회원가입"});
         }

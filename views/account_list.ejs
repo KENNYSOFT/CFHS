@@ -32,7 +32,7 @@
     var tr = $(this);
     var td = tr.children();
     var team_or_id = td.eq(0).text();
-    alert(team_or_id);
+    console.log(team_or_id);
     openOverlay('idOverlay');
     });
 
@@ -44,13 +44,13 @@
         document.getElementById(contentId).style.display="none";
     }
     function kick(userId){
-        alert("kick "+userId);
+        console.log("kick "+userId);
     }
     function allowInvitation(tName){
-        alert("allow invitation of "+tName);
+        console.log("allow invitation of "+tName);
     }
     function declineInvitation(tName){
-        alert("decline invitation of "+tName);
+        console.log("decline invitation of "+tName);
     }
     </script>
 
